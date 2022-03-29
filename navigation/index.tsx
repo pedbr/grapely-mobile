@@ -21,18 +21,22 @@ import {
   RootTabScreenProps,
 } from '../types'
 import LinkingConfiguration from './LinkingConfiguration'
+import { useAuthentication } from '../hooks/useAuthentication'
+import SignInScreen from '../screens/SignInScreen'
 
 export default function Navigation({
   colorScheme,
 }: {
   colorScheme: ColorSchemeName
 }) {
+  const { user } = useAuthentication()
+
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      {user ? <RootNavigator /> : <SignInScreen />}
     </NavigationContainer>
   )
 }
