@@ -128,10 +128,25 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name='Tasks'
         component={TasksScreen}
-        options={{
+        options={({ navigation }) => ({
           title: 'Tasks',
           tabBarIcon: ({ color }) => <TabBarIcon name='tasks' color={color} />,
-        }}
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate('QrScannerScreen')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name='qrcode'
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}
+              />
+            </Pressable>
+          ),
+        })}
       />
     </BottomTab.Navigator>
   )
