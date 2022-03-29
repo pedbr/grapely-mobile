@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native'
 
-import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
 
 export default function TasksScreen() {
@@ -12,7 +11,6 @@ export default function TasksScreen() {
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
-      <EditScreenInfo path='/screens/TasksScreen.tsx' />
     </View>
   )
 }
