@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { Button } from 'react-native-elements'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { View, Text } from '../components/Themed'
@@ -43,12 +42,7 @@ const SignInScreen = () => {
         </View>
       )}
 
-      <View
-        style={{
-          width: 250,
-          marginTop: 10,
-        }}
-      >
+      <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
           placeholder='Email'
@@ -66,7 +60,7 @@ const SignInScreen = () => {
           secureTextEntry={true}
         />
 
-        <Button style={{ marginTop: 20 }} title='Sign in' onPress={signIn} />
+        <Button style={styles.button} title='Sign in' onPress={signIn} />
       </View>
     </View>
   )
@@ -82,6 +76,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  formContainer: {
+    width: 250,
+    marginTop: 10,
+  },
   input: {
     height: 40,
     borderColor: 'gray',
@@ -90,6 +88,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 8,
   },
+  button: { marginTop: 20 },
 })
 
 export default SignInScreen

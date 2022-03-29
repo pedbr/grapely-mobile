@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const auth = getAuth()
 
@@ -7,21 +8,24 @@ export function useAuthentication() {
   const [user, setUser] = useState<User>()
   const [loading, setLoading] = useState(false)
 
-  console.log('user', user)
-
   useEffect(() => {
     setLoading(true)
     const unsubscribeFromAuthStatusChanged = onAuthStateChanged(
       auth,
-      (user) => {
+      async (user) => {
         if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
           setUser(user)
+          try {
+            const token = await user?.getIdToken()
+            await AsyncStorage.setItem('accessToken', `Bearer ${token}`)
+          } catch (e) {
+            console.error(e)
+          }
           setLoading(false)
         } else {
           // User is signed out
           setUser(undefined)
+          await AsyncStorage.setItem('accessToken', `Bearer undefined`)
           setLoading(false)
         }
       }
