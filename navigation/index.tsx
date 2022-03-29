@@ -13,8 +13,8 @@ import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import ModalScreen from '../screens/ModalScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
-import TabOneScreen from '../screens/TabOneScreen'
-import TabTwoScreen from '../screens/TabTwoScreen'
+import WineriesScreen from '../screens/WineriesScreen'
+import TasksScreen from '../screens/TasksScreen'
 import {
   RootStackParamList,
   RootTabParamList,
@@ -74,17 +74,19 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName='TabOne'
+      initialRouteName='Wineries'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name='TabOne'
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+        name='Wineries'
+        component={WineriesScreen}
+        options={({ navigation }: RootTabScreenProps<'Wineries'>) => ({
+          title: 'Wineries',
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name='industry' color={color} />
+          ),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -103,11 +105,11 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name='TabTwo'
-        component={TabTwoScreen}
+        name='Tasks'
+        component={TasksScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+          title: 'Tasks',
+          tabBarIcon: ({ color }) => <TabBarIcon name='tasks' color={color} />,
         }}
       />
     </BottomTab.Navigator>
