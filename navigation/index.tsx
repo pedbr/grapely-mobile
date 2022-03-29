@@ -23,6 +23,7 @@ import {
 import LinkingConfiguration from './LinkingConfiguration'
 import { useAuthentication } from '../hooks/useAuthentication'
 import SignInScreen from '../screens/SignInScreen'
+import QrScannerScreen from '../screens/QrScannerScreen'
 
 export default function Navigation({
   colorScheme,
@@ -62,6 +63,7 @@ function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name='Modal' component={ModalScreen} />
+        <Stack.Screen name='QrScannerScreen' component={QrScannerScreen} />
       </Stack.Group>
     </Stack.Navigator>
   )
@@ -103,6 +105,21 @@ function BottomTabNavigator() {
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate('QrScannerScreen')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name='qrcode'
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}
               />
             </Pressable>
           ),
